@@ -15,7 +15,8 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const userId = userCredential.user.uid;
-        // You could store the user's ID in your application's state or local storage
+        const token = userCredential.user.getIdToken(); // Get the authentication token
+        localStorage.setItem('token', token); // Store the token in local storage
         navigate('/dashboard', { state: { userId } });
       })
       .catch(() => {
