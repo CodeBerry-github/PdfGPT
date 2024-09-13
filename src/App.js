@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './components/Dashboard';
+import './styles/App.css'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
