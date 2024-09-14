@@ -1,12 +1,24 @@
 // src/components/Dashboard.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import '../styles/Dashboard.css';
 import { useNavigate } from 'react-router-dom';
 import FileUpload from './FileUpload';  // Import the FileUpload component
+import profile_img from '../styles/icons/Profile.svg';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [showProfileCard, setShowProfileCard] = useState(false); // Add a state to track whether to show the profile card
+  const [userName, setUserName] = useState(''); // Add a state to store the username
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user) {
+      const email = user.email;
+      const userName = email.substring(0, email.indexOf('@')); // Extract the username from the email
+      setUserName(userName); // Update the username state
+    }
+  }, [auth]);
 
   const handleLogout = async () => {
     try {
@@ -22,17 +34,35 @@ const Dashboard = () => {
     // Add your file processing or AI integration logic here
   };
 
+  const handleProfileIconHover = () => {
+    setShowProfileCard(true);
+  };
+
+  const handleProfileIconLeave = () => {
+    setShowProfileCard(false);
+  };
+
   return (
     <div className="dashboard-container">
       <header className="header-container">
         <div className="header-left">chatwithwebsite</div>
         <div className="header-right">
           <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Help</li>
+            <li>{userName}</li>
           </ul>
-          <button onClick={handleLogout}>Logout</button>
+          <img
+            className='profile_img'
+            src={profile_img}
+            onMouseEnter={handleProfileIconHover}
+            onMouseLeave={handleProfileIconLeave}
+          ></img>
+          {showProfileCard && (
+            <div className="profile-card">
+              <h2>{userName}</h2> // Display the username
+              <p>{'anish.nagula@gmail.com'}</p>
+              <p className='credit'>Credits left: {15}</p>
+            </div>
+          )}
         </div>
       </header>
       <div className="dashboard-content">
@@ -43,8 +73,8 @@ const Dashboard = () => {
           </ul>
           <div style={{ flexGrow: 1 }}></div>
           <ul className="bottom-links">
-            <li>Settings</li>
-            <li>Your Profile</li>
+            <li>About</li>
+            <li onClick={handleLogout}>Logout</li>
           </ul>
         </div>
         <div className="main-content">
