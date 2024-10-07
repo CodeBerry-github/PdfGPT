@@ -1,4 +1,3 @@
-// src/components/Dashboard.js
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import '../styles/Dashboard.css';
@@ -43,48 +42,48 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <header className="header-container">
-        <div className="header-left">chatwithwebsite</div>
-        <div className="header-right">
+    <div className="dashboard-unique-container">
+      <header className="dashboard-unique-header">
+        <div className="dashboard-unique-header-left">chatwithwebsite</div>
+        <div className="dashboard-unique-header-right">
           <ul>
             <li>{userName}</li>
           </ul>
           <img
-            className='profile_img'
+            className='dashboard-unique-profile-img'
             src={profile_img}
             onMouseEnter={handleProfileIconHover}
             onMouseLeave={handleProfileIconLeave}
           ></img>
           {showProfileCard && (
-            <div className="profile-card">
-              <h2>{userName}</h2> // Display the username
+            <div className="dashboard-unique-profile-card">
+              <h2>{userName}</h2> {/* Display the username */}
               <p>{'anish.nagula@gmail.com'}</p>
-              <p className='credit'>Credits left: {15}</p>
+              <p className='dashboard-unique-credit'>Credits left: {15}</p>
             </div>
           )}
         </div>
       </header>
-      <div className="dashboard-content">
-        <div className="sidebar">
-          <ul className="top-links">
+      <div className="dashboard-unique-content">
+        <div className="dashboard-unique-sidebar">
+          <ul className="dashboard-unique-top-links">
             <li>New Chat</li>
             <li>History</li>
           </ul>
           <div style={{ flexGrow: 1 }}></div>
-          <ul className="bottom-links">
+          <ul className="dashboard-unique-bottom-links">
             <li>About</li>
             <li onClick={handleLogout}>Logout</li>
           </ul>
         </div>
-        <div className="main-content">
+        <div className="dashboard-unique-main-content">
           <div></div>
-          <div className="search-bar-container">
-            <div className="search-bar-wrapper">
+          <div className="dashboard-unique-search-bar-container">
+            <div className="dashboard-unique-search-bar-wrapper">
               {/* FileUpload button here */}
               <FileUpload onFileUpload={handleFileUpload} />
-              <input type="text" placeholder="Search..." className="search-bar" />
-              <button className="search-button">
+              <input type="text" placeholder="Search..." className="dashboard-unique-search-bar" />
+              <button className="dashboard-unique-search-button">
                 <i className="fas fa-search" aria-hidden="true"></i>
               </button>
             </div>
